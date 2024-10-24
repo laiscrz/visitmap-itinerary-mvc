@@ -22,6 +22,9 @@ public class Place {
     @NotBlank(message = "O nome da atração é obrigatório.")
     private String nome;
 
+    @NotBlank(message = "A descrição é obrigatória.")
+    private String descricao;
+
     @NotBlank(message = "A cidade é obrigatória.")
     private String cidade;
 
