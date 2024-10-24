@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>VisitMap - Lista de Itinerários</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #F4F6FF;
+            color: #333333;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .header-title {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Incluir o fragmento do header -->
+<header th:insert="~{fragments/header :: header}"></header>
+
+<main class="container my-4">
+    <h1 class="header-title">Lista de Itinerários</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>País</th>
+            <th>Data de Criação</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="itinerary : ${itineraries}">
+            <td th:text="${itinerary.nome}"></td>
+            <td th:text="${itinerary.pais}"></td>
+            <td th:text="${itinerary.dataCriacao}"></td>
+            <td>
+                <a th:href="@{/itineraries/{id}(id=${itinerary.id})}" class="btn btn-info btn-sm">
+                    <i class="fas fa-eye"></i> Ver
+                </a>
+                <a th:href="@{/itineraries/edit/{id}(id=${itinerary.id})}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <a th:href="@{/itineraries/delete/{id}(id=${itinerary.id})}" class="btn btn-danger btn-sm"
+                   th:onclick="'return confirm(\'Tem certeza que deseja deletar este itinerário?\');'">
+                    <i class="fas fa-trash"></i> Deletar
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/itineraries/new}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Adicionar Novo Itinerário
+    </a>
+</main>
+
+<!-- Incluir o fragmento do footer -->
+<footer th:insert="~{fragments/footer :: footer}"></footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
