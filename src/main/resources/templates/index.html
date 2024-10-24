@@ -24,33 +24,32 @@
             flex: 1;
         }
         .option-card {
-            background: linear-gradient(to right, #F94C10, #B31312);
-            border-radius: 12px;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            color: #ffffff;
+            background: #ffffff; /* Fundo branco */
+            border: none; /* Remover borda sólida */
+            border-radius: 12px; /* Arredondamento dos cantos */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+            padding: 20px; /* Espaçamento interno */
+            position: relative; /* Para animação */
+            overflow: hidden; /* Para bordas arredondadas */
+            text-align: center; /* Centralizar texto */
         }
         .option-card:hover {
-            transform: scale(1.05);
-            background: linear-gradient(to right, #F94C10, #B31312);
+            transform: translateY(-5px) scale(1.05); /* Efeito de elevação */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
         }
         .option-icon {
             font-size: 4rem;
-            color: #ffffff;
-        }
-        .option-card p {
-            color: #ffffff;
-        }
-        .option-card a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-        .option-card a:hover {
-            text-decoration: none;
-            color: #ffffff;
+            color: #B31312;
+            margin-bottom: 15px; /* Espaço entre ícone e título */
         }
         .option-card h3 {
-            color: #ffffff;
+            font-size: 1.5rem; /* Tamanho do título */
+            font-weight: 700; /* Peso do título */
+        }
+        .option-card p {
+            color: #555555; /* Cor do texto no parágrafo */
+            font-size: 1rem; /* Tamanho do texto */
         }
         .welcome-title {
             font-size: 3rem;
@@ -59,11 +58,6 @@
             -webkit-text-fill-color: transparent;
             text-align: center;
             margin-bottom: 0.5rem;
-        }
-        .welcome-title span {
-            font-size: 4rem;
-            color: none;
-            vertical-align: middle;
         }
         .welcome-subtitle {
             font-size: 1.5rem;
@@ -92,7 +86,7 @@
         <!-- Gerenciar Atrações Turísticas -->
         <div class="col-md-5 mb-4">
             <a href="#" th:href="@{/places}" class="text-decoration-none">
-                <div class="card option-card text-center p-4">
+                <div class="card option-card">
                     <i class="fas fa-map-marker-alt option-icon mb-3"></i>
                     <h3>Gerenciar Lugares Turísticos</h3>
                     <p>Crie, edite e organize suas lugares favoritas.</p>
@@ -103,14 +97,13 @@
         <!-- Gerenciar Itinerários -->
         <div class="col-md-5 mb-4">
             <a href="#" th:href="@{/itineraries}" class="text-decoration-none">
-                <div class="card option-card text-center p-4">
+                <div class="card option-card">
                     <i class="fas fa-route option-icon mb-3"></i>
                     <h3>Gerenciar Itinerários</h3>
                     <p>Adicione, remova e gerencie seus itinerários.</p>
                 </div>
             </a>
         </div>
-
     </div>
 </main>
 
