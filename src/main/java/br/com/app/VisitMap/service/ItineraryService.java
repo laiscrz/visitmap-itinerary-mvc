@@ -22,17 +22,17 @@ public class ItineraryService {
     }
 
     // Busca pelo ID
-    public Itinerary findByIdPlaylist(Long id) {
+    public Itinerary findByIdItinerary(Long id) {
         return iItineraryRepository.findById(id).orElse(null);
     }
 
     // Salva ou atualiza
-    public Itinerary savePlaylist(Itinerary itinerary) {
+    public Itinerary saveItinerary(Itinerary itinerary) {
         return iItineraryRepository.save(itinerary);
     }
 
     // Remove pelo ID
-    public void deleteByIdPlaylist(Long id) {
+    public void deleteByIdItinerary(Long id) {
         iItineraryRepository.deleteById(id);
     }
 }

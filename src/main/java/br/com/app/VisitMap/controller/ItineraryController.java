@@ -6,6 +6,7 @@ import br.com.app.VisitMap.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +27,14 @@ public class ItineraryController {
         List<Itinerary> itineraries = itineraryService.findAllItneraries();
         ModelAndView modelAndView = new ModelAndView("itinerary/list");
         modelAndView.addObject("itineraries", itineraries);
+        return modelAndView;
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView showPlaylistDetails(@PathVariable Long id) {
+        Itinerary itinerary = itineraryService.findByIdItinerary(id);
+        ModelAndView modelAndView = new ModelAndView("itinerary/details");
+        modelAndView.addObject("itinerary", itinerary);
         return modelAndView;
     }
 }
