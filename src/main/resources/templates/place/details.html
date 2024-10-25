@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>VisitMap - Detalhes do Lugar</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .details-container {
+        margin-top: 2rem;
+    }
+    .image-container img {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+    .info-section {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Incluir o fragmento do header -->
+<header th:insert="~{fragments/header :: header}"></header>
+
+<main class="container details-container">
+  <h1 class="mb-4" th:text="${place.nome}">Nome do Lugar</h1>
+
+  <div class="row">
+    <div class="col-md-6 image-container">
+      <img th:src="${place.urlImagem}" alt="Imagem do lugar">
+    </div>
+    <div class="col-md-6 info-section">
+      <h3>Detalhes</h3>
+      <p><strong>Tipo:</strong> <span th:text="${place.tipo}">Tipo do lugar</span></p>
+      <p><strong>Descrição:</strong> <span th:text="${place.descricao}">Descrição do lugar</span></p>
+      <p><strong>Entrada:</strong> <span th:text="${place.entrada}">Tipo de entrada</span></p>
+      <p><strong>Cidade:</strong> <span th:text="${place.cidade}">Cidade</span></p>
+      <p><strong>Estado:</strong> <span th:text="${place.estado}">Estado</span></p>
+      <p><strong>Rua:</strong> <span th:text="${place.rua}">Rua</span></p>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <a th:href="@{/places}" class="btn btn-secondary">Voltar à Lista</a>
+    <a th:href="@{/places/edit/{id}(id=${place.id})}" class="btn btn-warning">Editar</a>
+    <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger" th:onclick="'return confirm(\'Tem certeza que deseja deletar este lugar?\');'">Deletar</a>
+  </div>
+</main>
+
+<!-- Incluir o fragmento do footer -->
+<footer th:insert="~{fragments/footer :: footer}"></footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
