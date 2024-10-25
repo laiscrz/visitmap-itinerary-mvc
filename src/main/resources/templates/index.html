@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>VisitMap - Home</title>
@@ -24,46 +24,47 @@
             flex: 1;
         }
         .option-card {
-            background: #ffffff; /* Fundo branco */
-            border: none; /* Remover borda sólida */
-            border-radius: 12px; /* Arredondamento dos cantos */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
-            padding: 20px; /* Espaçamento interno */
-            position: relative; /* Para animação */
-            overflow: hidden; /* Para bordas arredondadas */
-            text-align: center; /* Centralizar texto */
+            background: #ffffff;
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
         }
         .option-card:hover {
-            transform: translateY(-5px) scale(1.05); /* Efeito de elevação */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
         .option-icon {
             font-size: 4rem;
             color: #B31312;
-            margin-bottom: 15px; /* Espaço entre ícone e título */
+            margin-bottom: 15px;
         }
         .option-card h3 {
-            font-size: 1.5rem; /* Tamanho do título */
-            font-weight: 700; /* Peso do título */
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         .option-card p {
-            color: #555555; /* Cor do texto no parágrafo */
-            font-size: 1rem; /* Tamanho do texto */
+            color: #555555;
+            font-size: 1rem;
         }
         .welcome-title {
-            font-size: 3rem;
+            font-size: 2rem;
             background: linear-gradient(to right, #F94C10, #B31312);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
             margin-bottom: 0.5rem;
         }
-        .welcome-subtitle {
-            font-size: 1.5rem;
-            color: #333333;
+        .welcome-message {
+            font-size: 1.2rem;
             text-align: center;
-            margin-bottom: 2rem;
+            margin: 20px 0;
+            color: #333333;
+            padding: 1rem;
         }
     </style>
 </head>
@@ -72,37 +73,41 @@
 <!-- Incluir o fragmento do header -->
 <header th:insert="~{fragments/header :: header}"></header>
 
-<!-- Seção Principal -->
-<main class="container mt-5 content">
-    <!-- Frase de boas-vindas -->
-    <div class="row">
-        <div class="col-12">
-            <h1 class="welcome-title">Bem-vindo ao VisitMap <span class="welcome-icon">🌐</span></h1>
-            <p class="welcome-subtitle">Gerencie seus itinerários de viagem de forma intuitiva.</p>
-        </div>
-    </div>
+<main>
+    <!-- Carrossel de boas-vindas -->
+    <div th:insert="~{fragments/carousel}"></div>
 
-    <div class="row justify-content-center">
-        <!-- Gerenciar Atrações Turísticas -->
-        <div class="col-md-5 mb-4">
-            <a href="#" th:href="@{/places}" class="text-decoration-none">
-                <div class="card option-card">
-                    <i class="fas fa-map-marker-alt option-icon mb-3"></i>
-                    <h3>Gerenciar Lugares Turísticos</h3>
-                    <p>Crie, edite e organize suas lugares favoritas.</p>
-                </div>
-            </a>
+    <!-- Seção Principal -->
+    <div class="container mt-5 content">
+
+        <!-- Mensagem abaixo do carrossel -->
+        <div class="welcome-message mb-4"> <!-- Adicionando margem inferior -->
+            <h2 class="welcome-title">Descubra o Melhor do VistMap! <span class="welcome-icon">🌐</span></h2>
+            <p>Estamos aqui para ajudar você a planejar a viagem dos seus sonhos. Explore novas experiências e crie memórias inesquecíveis!</p>
         </div>
 
-        <!-- Gerenciar Itinerários -->
-        <div class="col-md-5 mb-4">
-            <a href="#" th:href="@{/itineraries}" class="text-decoration-none">
-                <div class="card option-card">
-                    <i class="fas fa-route option-icon mb-3"></i>
-                    <h3>Gerenciar Itinerários</h3>
-                    <p>Adicione, remova e gerencie seus itinerários.</p>
-                </div>
-            </a>
+        <div class="row justify-content-center mb-5"> <!-- Adicionando margem inferior -->
+            <!-- Gerenciar Atrações Turísticas -->
+            <div class="col-md-5 mb-4">
+                <a href="#" th:href="@{/places}" class="text-decoration-none">
+                    <div class="card option-card">
+                        <i class="fas fa-map-marker-alt option-icon mb-3"></i>
+                        <h3>Gerenciar Lugares Turísticos</h3>
+                        <p>Crie, edite e organize suas lugares favoritas.</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Gerenciar Itinerários -->
+            <div class="col-md-5 mb-4">
+                <a href="#" th:href="@{/itineraries}" class="text-decoration-none">
+                    <div class="card option-card">
+                        <i class="fas fa-route option-icon mb-3"></i>
+                        <h3>Gerenciar Itinerários</h3>
+                        <p>Adicione, remova e gerencie seus itinerários.</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </main>
