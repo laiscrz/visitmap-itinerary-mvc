@@ -10,18 +10,78 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    body {
+           background-color: #F0F4F8;
+           color: #333333;
+           font-family: 'Roboto', sans-serif;
+           display: flex;
+           flex-direction: column;
+           min-height: 100vh;
+           margin: 0;
+    }
     .details-container {
         margin-top: 2rem;
+        padding: 2rem;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
     .image-container img {
-        max-width: 100%;
-        border-radius: 8px;
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
     .info-section {
-        background-color: #f8f9fa;
-        padding: 1.5rem;
+        background-color: #FAFAFA;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-top: 1.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(to right, #009B77, #00A4CC, #002D62);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    h3 {
+        font-size: 1.5rem;
+        color: #555555;
+        margin-bottom: 1rem;
+    }
+    .btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.2rem;
         border-radius: 8px;
-        margin-top: 1rem;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .btn:hover {
+        transform: scale(1.05);
+    }
+    .btn-secondary {
+        background-color: #6C757D;
+        border: none;
+    }
+    .btn-warning {
+        background-color: #FFC107;
+        border: none;
+        color: #212529;
+    }
+    .btn-danger {
+        background-color: #DC3545;
+        border: none;
+    }
+    .btn-secondary:hover {
+        background-color: #5A6268;
+    }
+    .btn-warning:hover {
+        background-color: #E0A800;
+    }
+    .btn-danger:hover {
+        background-color: #C82333;
     }
   </style>
 </head>
@@ -30,7 +90,7 @@
 <!-- Incluir o fragmento do header -->
 <header th:insert="~{fragments/header :: header}"></header>
 
-<main class="container details-container">
+<main class="container details-container mb-4">
   <h1 class="mb-4" th:text="${place.nome}">Nome do Lugar</h1>
 
   <div class="row">
@@ -38,7 +98,7 @@
       <img th:src="${place.urlImagem}" alt="Imagem do lugar">
     </div>
     <div class="col-md-6 info-section">
-      <h3>Detalhes</h3>
+      <h3>Detalhes do Lugar</h3>
       <p><strong>Tipo:</strong> <span th:text="${place.tipo}">Tipo do lugar</span></p>
       <p><strong>Descrição:</strong> <span th:text="${place.descricao}">Descrição do lugar</span></p>
       <p><strong>Entrada:</strong> <span th:text="${place.entrada}">Tipo de entrada</span></p>
