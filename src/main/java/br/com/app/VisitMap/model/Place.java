@@ -37,9 +37,6 @@ public class Place {
     @Enumerated(EnumType.STRING)
     private TypePlace tipo;
 
-    @Size(max = 500, message = "A descrição não pode ter mais de 500 caracteres.")
-    private String description;
-
     @Enumerated(EnumType.STRING)
     private TypeEntry entrada;
 
