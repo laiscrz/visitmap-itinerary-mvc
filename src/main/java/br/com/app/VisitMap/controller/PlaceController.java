@@ -41,9 +41,23 @@ public class PlaceController {
         return modelAndView;
     }
 
-
     @PostMapping
     public String savePlace(@ModelAttribute Place place) {
+        placeService.savePlace(place);
+        return "redirect:/places";
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditPlaceForm(@PathVariable Long id) {
+        Place place = placeService.findByIdPlace(id);
+        ModelAndView modelAndView = new ModelAndView("place/form");
+        modelAndView.addObject("place", place);
+        return modelAndView;
+    }
+
+    @PostMapping("/{id}")
+    public String updateMusic(@PathVariable Long id, @ModelAttribute Place place) {
+        place.setId(id);
         placeService.savePlace(place);
         return "redirect:/places";
     }
