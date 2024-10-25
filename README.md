@@ -2,6 +2,41 @@
 
 VisitMap é uma aplicação desenvolvida em Spring Boot e Thymeleaf que permite aos usuários planejar e explorar roteiros turísticos de forma fácil e interativa. A aplicação oferece uma interface amigável para visualizar atrações turísticas, suas informações e criar itinerários personalizados.
 
+## 📚 Estrutura do Banco de Dados
+
+A aplicação utiliza um modelo de banco de dados relacional para gerenciar as informações das locais turisticos, Itnerários e suas interações. Abaixo está o diagrama de Entidade e Relacionamento com as tabelas principais da estrutura do banco de dados:
+
+```mermaid
+erDiagram
+    PLACE {
+        Long id PK "Identificador único"
+        String nome "Nome da atração"
+        String descricao "Descrição da atração"
+        String cidade "Cidade onde a atração está localizada"
+        String estado "Estado onde a atração está localizada"
+        String rua "Rua onde a atração está localizada"
+        String tipo "Tipo da atração (enum)"
+        String description "Descrição adicional"
+        String entrada "Tipo de entrada (enum)"
+        String urlImagem "URL da imagem da atração"
+    }
+
+    ITINERARY {
+        Long id PK "Identificador único"
+        String nome "Nome do itinerário"
+        LocalDate data_criacao "Data de criação do itinerário"
+        String pais "País do itinerário (enum)"
+    }
+
+    ITINERARY_PLACE {
+        Long itinerary_id FK "Referência ao itinerário"
+        Long place_id FK "Referência ao local"
+    }
+
+    PLACE ||--o{ ITINERARY_PLACE : "é incluído em"
+    ITINERARY ||--o{ ITINERARY_PLACE : "inclui"
+```
+
 ## Funcionalidades ✨
 
 - **🗺️ Cadastro de Itinerários**: Crie itinerários com nomes, descrições e datas programadas.
