@@ -6,10 +6,7 @@ import br.com.app.VisitMap.model.enums.TypePlace;
 import br.com.app.VisitMap.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -35,6 +32,20 @@ public class PlaceController {
         ModelAndView modelAndView = new ModelAndView("place/details");
         modelAndView.addObject("place", place);
         return modelAndView;
+    }
+
+    @GetMapping("/new")
+    public ModelAndView showCreatePLaceForm() {
+        ModelAndView modelAndView = new ModelAndView("place/form");
+        modelAndView.addObject("place", new Place());
+        return modelAndView;
+    }
+
+
+    @PostMapping
+    public String savePlace(@ModelAttribute Place place) {
+        placeService.savePlace(place);
+        return "redirect:/places";
     }
 
     @GetMapping("/delete/{id}")

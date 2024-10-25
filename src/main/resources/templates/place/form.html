@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>VisitMap - Cadastro de Lugar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+          background-color: #F0F4F8;
+          color: #333333;
+          font-family: 'Roboto', sans-serif;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          margin: 0;
+        }
+        .form-container {
+          margin-top: 2rem;
+          padding: 2rem;
+          border-radius: 12px;
+          background-color: #ffffff;
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          background: linear-gradient(to right, #009B77, #00A4CC, #002D62);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .btn {
+          font-size: 1rem;
+          padding: 0.8rem 1.2rem;
+          border-radius: 8px;
+          transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+          transform: scale(1.05);
+        }
+        .btn-primary {
+          background-color: #007BFF;
+          border: none;
+        }
+        .btn-primary:hover {
+          background-color: #0056b3;
+        }
+        .btn-secondary {
+          background-color: #6C757D;
+          border: none;
+        }
+        .btn-secondary:hover {
+          background-color: #5A6268;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Incluir o fragmento do header -->
+<header th:insert="~{fragments/header :: header}"></header>
+
+<main class="container form-container mb-4">
+    <h1 class="mb-4">Cadastrar Lugar</h1>
+
+    <form th:action="@{/places}" th:object="${place}" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" th:field="*{nome}" class="form-control" id="nome" required>
+            <div th:if="${#fields.hasErrors('nome')}" class="text-danger" th:errors="*{nome}">Nome é obrigatório</div>
+        </div>
+        <div class="col-md-6">
+            <label for="tipo" class="form-label">Tipo</label>
+            <select th:field="*{tipo}" class="form-select" id="tipo" required>
+                <option value="" disabled>Selecione o tipo</option>
+                <option th:each="typePlace : ${T(br.com.app.VisitMap.model.enums.TypePlace).values()}"
+                        th:value="${typePlace}" th:text="${typePlace}"></option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="descricao" class="form-label">Descrição</label>
+            <textarea th:field="*{descricao}" class="form-control" id="descricao" rows="3" required></textarea>
+            <div th:if="${#fields.hasErrors('descricao')}" class="text-danger" th:errors="*{descricao}">Descrição é obrigatória</div>
+        </div>
+        <div class="col-md-4">
+            <label for="cidade" class="form-label">Cidade</label>
+            <input type="text" th:field="*{cidade}" class="form-control" id="cidade" required>
+            <div th:if="${#fields.hasErrors('cidade')}" class="text-danger" th:errors="*{cidade}">Cidade é obrigatória</div>
+        </div>
+        <div class="col-md-4">
+            <label for="estado" class="form-label">Estado</label>
+            <input type="text" th:field="*{estado}" class="form-control" id="estado" required>
+            <div th:if="${#fields.hasErrors('estado')}" class="text-danger" th:errors="*{estado}">Estado é obrigatório</div>
+        </div>
+        <div class="col-md-4">
+            <label for="rua" class="form-label">Rua</label>
+            <input type="text" th:field="*{rua}" class="form-control" id="rua" required>
+            <div th:if="${#fields.hasErrors('rua')}" class="text-danger" th:errors="*{rua}">Rua é obrigatória</div>
+        </div>
+        <div class="col-md-6">
+            <label for="entrada" class="form-label">Entrada</label>
+            <select th:field="*{entrada}" class="form-select" id="entrada" required>
+                <option value="" disabled>Selecione o tipo de entrada</option>
+                <option th:each="typeEntry : ${T(br.com.app.VisitMap.model.enums.TypeEntry).values()}"
+                        th:value="${typeEntry}" th:text="${typeEntry}"></option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="urlImagem" class="form-label">URL da Imagem</label>
+            <input type="url" th:field="*{urlImagem}" class="form-control" id="urlImagem">
+        </div>
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a th:href="@{/places}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<!-- Incluir o fragmento do footer -->
+<footer th:insert="~{fragments/footer :: footer}"></footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

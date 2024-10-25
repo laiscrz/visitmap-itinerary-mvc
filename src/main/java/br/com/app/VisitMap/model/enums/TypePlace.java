@@ -2,7 +2,7 @@ package br.com.app.VisitMap.model.enums;
 
 public enum TypePlace {
     MUSEU,
-    Estatua,
+    ESTATUA,
     PARQUE,
     OUTRO
 }
