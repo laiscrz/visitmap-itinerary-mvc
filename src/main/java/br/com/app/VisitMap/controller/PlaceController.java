@@ -23,17 +23,31 @@ public class PlaceController {
 
     @GetMapping
     public ModelAndView showListPlaces() {
-        List<Place> musics = placeService.findAllPlaces();
+        List<Place> places = placeService.findAllPlaces();
         ModelAndView modelAndView = new ModelAndView("place/list");
-        modelAndView.addObject("places", musics);
+        modelAndView.addObject("places", places);
         return modelAndView;
     }
 
     @GetMapping("/{id}")
     public ModelAndView showMusicDetails(@PathVariable Long id) {
-        Place music = placeService.findByIdPlace(id);
+        Place place = placeService.findByIdPlace(id);
         ModelAndView modelAndView = new ModelAndView("place/details");
-        modelAndView.addObject("place", music);
+        modelAndView.addObject("place", place);
+        return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView deletePlace(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("place/list");
+        try {
+            placeService.deleteByIdPlace(id);
+
+            modelAndView.addObject("message", "Lugar excluído com sucesso.");
+        } catch (RuntimeException e) {
+            modelAndView.addObject("error", e.getMessage());
+        }
+        modelAndView.addObject("places", placeService.findAllPlaces());
         return modelAndView;
     }
 

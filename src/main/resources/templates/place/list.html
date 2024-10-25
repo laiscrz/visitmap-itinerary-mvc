@@ -40,6 +40,13 @@
 <main class="container my-4">
     <h1 class="header-title">Lista de Lugares</h1>
 
+    <!-- Exibe mensagem de sucesso -->
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+    <!-- Exibe mensagem de erro -->
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -57,7 +64,7 @@
             <td>
                 <a th:href="@{/places/{id}(id=${place.id})}" class="btn btn-info btn-sm">Ver</a>
                 <a th:href="@{/places/edit/{id}(id=${place.id})}" class="btn btn-warning btn-sm">Editar</a>
-                <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger btn-sm" th:onclick="'return confirm(\'Tem certeza que deseja deletar este lugar?\');'">Deletar</a>
+                <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger btn-sm" >Deletar</a>
             </td>
         </tr>
         </tbody>
