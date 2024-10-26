@@ -62,6 +62,15 @@ erDiagram
 - **Deletar Lugar**: `GET /places/delete/{id}`  
 
 ---
+## 🧪 Testes Unitários
+
+A aplicação **VisitMap** inclui uma suíte de testes unitários que garante a qualidade e o funcionamento adequado dos serviços. Foram implementados testes para as classes `ItineraryService` e `PlaceService` utilizando **JUnit** e **Mockito**. 
+
+No total, 12 testes foram executados com sucesso, confirmando que as funcionalidades principais estão funcionando conforme o esperado.
+
+![Terminal com comando `mvn clean test`](https://github.com/user-attachments/assets/f03da1d2-d8c9-4a78-bec9-4cc4b63b6a80)
+
+---
 
 ## Funcionalidades ✨
 
