@@ -1,5 +1,7 @@
 # 🌍 VisitMap
 
+> Desenvolvido por: Lais Alves da S Cruz - RM552258 👩🏻‍💻
+
 **VisitMap** é uma aplicação desenvolvida em Spring Boot e Thymeleaf que permite aos usuários planejar e explorar roteiros turísticos de forma fácil e interativa. A aplicação oferece uma interface amigável para visualizar locais turísticos, suas informações e criar itinerários personalizados.
 
 ## 📚 Estrutura do Banco de Dados
