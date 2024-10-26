@@ -20,7 +20,7 @@ RUN mvn clean package
 RUN adduser -D appuser
 
 # Altere a propriedade do arquivo JAR gerado para o usuário não privilegiado
-RUN chown appuser:appuser target/Playmix-0.0.1-SNAPSHOT.jar
+RUN chown appuser:appuser target/VisitMap-0.0.1-SNAPSHOT.jar
 
 # Altere para o usuário não privilegiado para evitar execução como root
 USER appuser
@@ -29,4 +29,4 @@ USER appuser
 EXPOSE 8080
 
 # Defina o comando de entrada para iniciar a aplicação usando o JAR gerado
-CMD ["java", "-jar", "target/Playmix-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/VisitMap-0.0.1-SNAPSHOT.jar"]
