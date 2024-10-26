@@ -1,6 +1,6 @@
 # 🌍 VisitMap
 
-VisitMap é uma aplicação desenvolvida em Spring Boot e Thymeleaf que permite aos usuários planejar e explorar roteiros turísticos de forma fácil e interativa. A aplicação oferece uma interface amigável para visualizar atrações turísticas, suas informações e criar itinerários personalizados.
+**VisitMap** é uma aplicação desenvolvida em Spring Boot e Thymeleaf que permite aos usuários planejar e explorar roteiros turísticos de forma fácil e interativa. A aplicação oferece uma interface amigável para visualizar locais turísticos, suas informações e criar itinerários personalizados.
 
 ## 📚 Estrutura do Banco de Dados
 
@@ -36,6 +36,32 @@ erDiagram
     PLACE ||--o{ ITINERARY_PLACE : "é incluído em"
     ITINERARY ||--o{ ITINERARY_PLACE : "inclui"
 ```
+---
+## 🛤️ Rotas da Aplicação
+
+### 🏠 Home (`index.html`)
+- **Página Inicial**: `GET /`  
+  Acesso à página inicial do VisitMap.
+
+### 🗺️ Itinerários (`/itineraries`)
+- **Listar Itinerários**: `GET /itineraries`  
+- **Detalhes do Itinerário**: `GET /itineraries/{id}`  
+- **Criar Novo Itinerário**: `GET /itineraries/new`  
+- **Salvar Itinerário**: `POST /itineraries`  
+- **Editar Itinerário**: `GET /itineraries/edit/{id}`  
+- **Atualizar Itinerário**: `POST /itineraries/{id}`  
+- **Deletar Itinerário**: `GET /itineraries/delete/{id}`  
+
+### 🏛️ Lugares Turisticos (`/places`)
+- **Listar Lugares**: `GET /places`  
+- **Detalhes do Lugar**: `GET /places/{id}`  
+- **Criar Novo Lugar**: `GET /places/new`  
+- **Salvar Lugar**: `POST /places`  
+- **Editar Lugar**: `GET /places/edit/{id}`  
+- **Atualizar Lugar**: `POST /places/{id}`  
+- **Deletar Lugar**: `GET /places/delete/{id}`  
+
+---
 
 ## Funcionalidades ✨
 
