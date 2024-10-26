@@ -71,6 +71,21 @@ No total, 12 testes foram executados com sucesso, confirmando que as funcionalid
 ![Terminal com comando `mvn clean test`](https://github.com/user-attachments/assets/f03da1d2-d8c9-4a78-bec9-4cc4b63b6a80)
 
 ---
+## 🚀 Deploy e Integração Contínua
+
+O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega contínua, aproveitando os recursos do **Azure Container Registry (ACR)** e do **Azure Web App for Containers**. A configuração foi feita para garantir que o processo de build, teste e release seja contínuo e integrado ao fluxo de desenvolvimento.
+
+### 📦 Azure Container Registry (ACR)
+- **Azure Container Registry** é utilizado para armazenar as imagens Docker do projeto. A imagem é construída e enviada para o registro como parte do pipeline de build.
+
+### 🌐 Web App for Containers
+- O **Azure Web App for Containers** é utilizado para hospedar a aplicação. Ele oferece um ambiente gerenciado para executar contêineres Docker, o que facilita o processo de deploy e manutenção.
+
+### 🔄 Pipeline de Build e Release
+1. **Build**: O pipeline de build é acionado a cada push para o repositório principal. Ele executa testes unitários com **JUnit** e **Mockito**, garantindo que o código está funcionando corretamente.
+2. **Release**: Após a conclusão bem-sucedida do build e dos testes, a imagem Docker é gerada e enviada ao **Azure Container Registry**.
+3. **Deploy**: O **Azure Web App for Containers** recupera a imagem mais recente do ACR e executa o contêiner, atualizando automaticamente a versão da aplicação em produção.
+---
 
 ## Funcionalidades ✨
 
