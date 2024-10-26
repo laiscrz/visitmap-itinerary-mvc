@@ -2,15 +2,12 @@ package br.com.app.VisitMap.controller;
 
 import br.com.app.VisitMap.model.Itinerary;
 import br.com.app.VisitMap.model.enums.TypeCountry;
-import br.com.app.VisitMap.model.enums.TypeEntry;
 import br.com.app.VisitMap.service.ItineraryService;
 import br.com.app.VisitMap.service.PlaceService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -41,12 +38,26 @@ public class ItineraryController {
         return modelAndView;
     }
 
+    @GetMapping("/new")
+    public ModelAndView showCreateItineraryForm() {
+        ModelAndView modelAndView = new ModelAndView("itinerary/form");
+        modelAndView.addObject("itinerary", new Itinerary());
+        modelAndView.addObject("places", placeService.findAllPlaces());
+        return modelAndView;
+    }
+
+    @PostMapping
+    public String saveItinerary(@Valid @ModelAttribute Itinerary itinerary) {
+        itineraryService.saveItinerary(itinerary);
+        return "redirect:/itineraries";
+    }
+
     @GetMapping("/delete/{id}")
     public ModelAndView deleteItinerary(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("itinerary/list");
         try {
             itineraryService.deleteByIdItinerary(id);
-            modelAndView.addObject("message", "Playlist excluída com sucesso.");
+            modelAndView.addObject("message", "Itinerário excluído com sucesso.");
         } catch (RuntimeException e) {
             modelAndView.addObject("error", e.getMessage());
         }
