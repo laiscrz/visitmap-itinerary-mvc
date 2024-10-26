@@ -169,6 +169,9 @@ steps:
 ```
 
    - Esse pipeline executa os testes unitários com **JUnit**, constrói o pacote da aplicação e gera uma imagem Docker, que é enviada ao **Azure Container Registry**. 🐳 O **ACR** permite armazenar e gerenciar essas imagens de forma segura.
+> [!IMPORTANT]  
+> **Nota: A variável `$(AzureSubscriptionID)` representa o identificador da assinatura do Azure, que é utilizado para autenticação e acesso seguro aos recursos da conta no Azure.** 
+
 
 4. **Configuração do Pipeline de Release (CD)** 🚢
    - Crie um pipeline de release para automatizar o deploy.
