@@ -4,7 +4,7 @@
 
 ## 📚 Estrutura do Banco de Dados
 
-A aplicação utiliza um modelo de banco de dados relacional para gerenciar as informações das locais turisticos, Itnerários e suas interações. Abaixo está o diagrama de Entidade e Relacionamento com as tabelas principais da estrutura do banco de dados:
+A aplicação utiliza um modelo de banco de dados relacional para gerenciar as informações dos locais turísticos, itinerários e suas interações. Abaixo está o diagrama de Entidade e Relacionamento com as tabelas principais da estrutura do banco de dados:
 
 ```mermaid
 erDiagram
@@ -36,7 +36,9 @@ erDiagram
     PLACE ||--o{ ITINERARY_PLACE : "é incluído em"
     ITINERARY ||--o{ ITINERARY_PLACE : "inclui"
 ```
+
 ---
+
 ## 🛤️ Rotas da Aplicação
 
 ### 🏠 Home (`index.html`)
@@ -62,6 +64,7 @@ erDiagram
 - **Deletar Lugar**: `GET /places/delete/{id}`  
 
 ---
+
 ## 🧪 Testes Unitários
 
 A aplicação **VisitMap** inclui uma suíte de testes unitários que garante a qualidade e o funcionamento adequado dos serviços. Foram implementados testes para as classes `ItineraryService` e `PlaceService` utilizando **JUnit** e **Mockito**. 
@@ -71,28 +74,112 @@ No total, 12 testes foram executados com sucesso, confirmando que as funcionalid
 ![Terminal com comando `mvn clean test`](https://github.com/user-attachments/assets/f03da1d2-d8c9-4a78-bec9-4cc4b63b6a80)
 
 ---
-## 🚀 Deploy e Integração Contínua
+## 🐳 Dockerfile Utilizado
 
-O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega contínua, aproveitando os recursos do **Azure Container Registry (ACR)** e do **Azure Web App for Containers**. A configuração foi feita para garantir que o processo de build, teste e release seja contínuo e integrado ao fluxo de desenvolvimento.
+A configuração do `Dockerfile` é essencial para preparar o ambiente de execução da aplicação, garantindo que todos os componentes necessários sejam incluídos na imagem Docker e que a aplicação seja executada de forma segura. Abaixo estão os detalhes de cada etapa do `Dockerfile` utilizado para o VisitMap:
 
-### 📦 Azure Container Registry (ACR)
-- **Azure Container Registry** é utilizado para armazenar as imagens Docker do projeto. A imagem é construída e enviada para o registro como parte do pipeline de build.
+```Dockerfile
+# Use a imagem base do OpenJDK 17 com suporte ao Alpine Linux
+FROM eclipse-temurin:17-jdk-alpine
 
-### 🌐 Web App for Containers
-- O **Azure Web App for Containers** é utilizado para hospedar a aplicação. Ele oferece um ambiente gerenciado para executar contêineres Docker, o que facilita o processo de deploy e manutenção.
+# Instale o Maven para gerenciar dependências e compilar o projeto
+RUN apk add --no-cache maven
 
-### 🔄 Pipeline de Build e Release
-1. **Build**: O pipeline de build é acionado a cada push para o repositório principal. Ele executa testes unitários com **JUnit** e **Mockito**, garantindo que o código está funcionando corretamente.
-2. **Release**: Após a conclusão bem-sucedida do build e dos testes, a imagem Docker é gerada e enviada ao **Azure Container Registry**.
-3. **Deploy**: O **Azure Web App for Containers** recupera a imagem mais recente do ACR e executa o contêiner, atualizando automaticamente a versão da aplicação em produção.
+# Defina o diretório de trabalho para a aplicação
+WORKDIR /app
+
+# Copie o arquivo de configuração do Maven para o diretório de trabalho
+COPY pom.xml .
+
+# Copie o código-fonte da aplicação para o diretório de trabalho
+COPY src ./src
+
+# Compile a aplicação com o Maven e gere o arquivo JAR
+RUN mvn clean package
+
+# Crie um usuário não privilegiado para executar a aplicação com segurança
+RUN adduser -D appuser
+
+# Altere a propriedade do arquivo JAR gerado para o usuário não privilegiado
+RUN chown appuser:appuser target/VisitMap-0.0.1-SNAPSHOT.jar
+
+# Altere para o usuário não privilegiado para evitar execução como root
+USER appuser
+
+# Exponha a porta 8080 para acesso à aplicação
+EXPOSE 8080
+
+# Defina o comando de entrada para iniciar a aplicação usando o JAR gerado
+CMD ["java", "-jar", "target/VisitMap-0.0.1-SNAPSHOT.jar"]
+```
 ---
 
-## Funcionalidades ✨
+## 🚀 Deploy e Integração Contínua - Azure Pipelines
 
-- **🗺️ Cadastro de Itinerários**: Crie itinerários com nomes, descrições e datas programadas.
-- **🏛️ Gerenciamento de Atrações**: Adicione, edite e remova atrações turísticas, incluindo informações detalhadas como nome, cidade, endereço, tipo, custo de entrada, horário de funcionamento e imagens.
-- **🔍 Exploração de Atrações**: Visualize todas as atrações disponíveis, filtrando por tipo e cidade.
-- **⭐ Avaliações**: Classifique atrações turísticas e veja a média das avaliações de outros usuários.
+O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega contínua, aproveitando os recursos do **Azure Container Registry (ACR)**, do **Azure Web App for Containers** e do **Azure Container Instance (ACI)**. O pipeline de CI/CD é configurado para garantir que o processo de build, teste e deploy seja contínuo e integrado ao fluxo de desenvolvimento. 🌐🔧
+
+### Passo a Passo para Configuração do CI/CD
+
+1. **Criação do Repos do Azure DevOps** ☁️
+   - Primeiramente, configure uma conta no **Azure DevOps** e crie um novo projeto para o **VisitMap**.
+   - Importe o repositório do GitHub e crie as tasks necessárias para o pipeline.
+
+2. **Criação da Infraestrutura no Azure** ☁️
+   - Inicie configurando uma conta no **Azure Cloud**.
+   - Utilize o **Azure CLI** para automatizar a criação da infraestrutura necessária para o seu projeto, garantindo que todos os recursos sejam provisionados de forma eficiente e padronizada.
+   - Adicione uma conexão de serviço com o **Azure Container Registry (ACR)** e o **Web App for Containers**, que serão utilizados para hospedar a aplicação. 
+   - O **Azure Container Instance (ACI)** também é uma excelente opção para testes e desenvolvimento. Ele fornece um ambiente leve e escalável, permitindo o desenvolvimento rápido de aplicações, ideal para cenários onde você precisa testar novas funcionalidades rapidamente sem a complexidade de um ambiente de produção completo.
+
+3. **Configuração do Pipeline de Build (CI)** 🛠️
+   - Crie um pipeline de build no **Azure Pipelines** para o repositório do projeto.
+   - Use o arquivo YAML gerado a seguir para configurar o pipeline de build:
+
+```yaml
+# azure-pipelines.yml
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@4
+  inputs:
+    azureSubscription: '$(AzureSubscriptionID)'
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package'
+    options: '-DskipTests=false'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+- task: Docker@2
+  inputs:
+    containerRegistry: 'visitmaprm552258'
+    repository: 'visitmap'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      latest
+```
+
+   - Esse pipeline executa os testes unitários com **JUnit**, constrói o pacote da aplicação e gera uma imagem Docker, que é enviada ao **Azure Container Registry**. 🐳 O **ACR** permite armazenar e gerenciar essas imagens de forma segura.
+
+4. **Configuração do Pipeline de Release (CD)** 🚢
+   - Crie um pipeline de release para automatizar o deploy.
+   - Configure o pipeline para usar o artefato gerado no pipeline de build como origem.
+   - Defina estágios de deploy para ambientes como **Desenvolvimento** (usando **Azure Container Instance - ACI**, que oferece um ambiente leve para testes e desenvolvimento) e **Produção** (usando **Azure Web App Service** para um ambiente robusto e escalável).
+
+5. **Teste do Deploy Manual** 🧪
+   - Realize um teste inicial do pipeline de release criando uma nova release manualmente.
+   - Verifique se a aplicação é implantada corretamente e se todos os serviços estão funcionando como esperado. ✅ O ACI é útil para testar novas funcionalidades antes de serem promovidas para o ambiente de produção.
+     
+---
 
 ## Tecnologias Utilizadas 🛠️
 
@@ -100,4 +187,9 @@ O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega c
 - **Thymeleaf**: Motor de templates para gerar páginas HTML dinâmicas.
 - **Hibernate**: ORM para mapeamento objeto-relacional.
 - **Oracle Database**: Banco de dados relacional utilizado para armazenar informações de itinerários e atrações turísticas.
+- **Azure DevOps**: Para configuração de pipelines de CI/CD.
+- **Docker**: Utilizado para containerização da aplicação.
 
+---
+
+> Esse guia detalha o processo de configuração do CI/CD, desde a criação do projeto no Azure até a configuração do pipeline de build e release, facilitando a automação do deploy e a entrega contínua da aplicação VisitMap. ✨🚀
