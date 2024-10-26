@@ -16,8 +16,8 @@ public class ItineraryService {
         this.iItineraryRepository = iItineraryRepository;
     }
 
-    // Retorna todas
-    public List<Itinerary> findAllItneraries() {
+    // Retorna todos
+    public List<Itinerary> findAllItineraries() {
         return iItineraryRepository.findAll();
     }
 

@@ -24,7 +24,7 @@ public class ItineraryController {
 
     @GetMapping
     public ModelAndView listItineraries() {
-        List<Itinerary> itineraries = itineraryService.findAllItneraries();
+        List<Itinerary> itineraries = itineraryService.findAllItineraries();
         ModelAndView modelAndView = new ModelAndView("itinerary/list");
         modelAndView.addObject("itineraries", itineraries);
         return modelAndView;
@@ -77,7 +77,7 @@ public class ItineraryController {
         } catch (RuntimeException e) {
             modelAndView.addObject("error", e.getMessage());
         }
-        modelAndView.addObject("itineraries", itineraryService.findAllItneraries());
+        modelAndView.addObject("itineraries", itineraryService.findAllItineraries());
         return modelAndView;
     }
 

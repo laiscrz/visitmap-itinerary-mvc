@@ -17,7 +17,7 @@ public class PlaceService {
         this.placeRepository = placeRepository;
     }
 
-    // Retorna todas as músicas
+    // Retorna todos
     public List<Place> findAllPlaces() {
         return placeRepository.findAll();
     }
