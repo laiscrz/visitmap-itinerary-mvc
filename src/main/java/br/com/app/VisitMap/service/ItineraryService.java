@@ -27,8 +27,8 @@ public class ItineraryService {
     }
 
     // Salva ou atualiza
-    public Itinerary saveItinerary(Itinerary itinerary) {
-        return iItineraryRepository.save(itinerary);
+    public void saveItinerary(Itinerary itinerary) {
+        iItineraryRepository.save(itinerary);
     }
 
     // Remove pelo ID
