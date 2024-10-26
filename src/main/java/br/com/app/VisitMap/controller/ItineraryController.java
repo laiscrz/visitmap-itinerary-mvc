@@ -52,6 +52,22 @@ public class ItineraryController {
         return "redirect:/itineraries";
     }
 
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditItineraryForm(@PathVariable Long id) {
+        Itinerary itinerary = itineraryService.findByIdItinerary(id);
+        ModelAndView modelAndView = new ModelAndView("itinerary/form");
+        modelAndView.addObject("itinerary", itinerary);
+        modelAndView.addObject("places", placeService.findAllPlaces());
+        return modelAndView;
+    }
+    
+    @PostMapping("/{id}")
+    public String updateItinerary(@PathVariable Long id, @ModelAttribute Itinerary itinerary) {
+        itinerary.setId(id);
+        itineraryService.saveItinerary(itinerary);
+        return "redirect:/itineraries";
+    }
+
     @GetMapping("/delete/{id}")
     public ModelAndView deleteItinerary(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("itinerary/list");
