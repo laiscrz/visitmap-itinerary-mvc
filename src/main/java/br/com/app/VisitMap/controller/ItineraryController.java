@@ -60,7 +60,7 @@ public class ItineraryController {
         modelAndView.addObject("places", placeService.findAllPlaces());
         return modelAndView;
     }
-    
+
     @PostMapping("/{id}")
     public String updateItinerary(@PathVariable Long id, @ModelAttribute Itinerary itinerary) {
         itinerary.setId(id);
