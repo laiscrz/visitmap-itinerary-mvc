@@ -5,7 +5,6 @@ import br.com.app.VisitMap.model.enums.TypePlace;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.List;
