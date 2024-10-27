@@ -195,7 +195,7 @@ CMD ["java", "-jar", "target/VisitMap-0.0.1-SNAPSHOT.jar"]
 
 ## 🚀 Deploy e Integração Contínua - Azure Pipelines
 
-O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega contínua, aproveitando os recursos do **Azure Container Registry (ACR)**, do **Azure Web App for Containers** e do **Azure Container Instance (ACI)**. O pipeline de CI/CD é configurado para garantir que o processo de build, teste e deploy seja contínuo e integrado ao fluxo de desenvolvimento. 🌐🔧
+O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega contínua, aproveitando os recursos do **Azure Container Registry (ACR)** e do **Azure Container Instances (ACI)**. O pipeline de CI/CD é configurado para garantir que o processo de build, teste e deploy seja contínuo e integrado ao fluxo de desenvolvimento. 🌐🔧
 
 ### Passo a Passo para Configuração do CI/CD
 
@@ -206,8 +206,7 @@ O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega c
 2. **Criação da Infraestrutura no Azure** ☁️
    - Inicie configurando uma conta no **Azure Cloud**.
    - Utilize o **Azure CLI** para automatizar a criação da infraestrutura necessária para o seu projeto, garantindo que todos os recursos sejam provisionados de forma eficiente e padronizada.
-   - Adicione uma conexão de serviço com o **Azure Container Registry (ACR)** e o **Web App for Containers**, que serão utilizados para hospedar a aplicação. 
-   - O **Azure Container Instance (ACI)** também é uma excelente opção para testes e desenvolvimento. Ele fornece um ambiente leve e escalável, permitindo o desenvolvimento rápido de aplicações, ideal para cenários onde você precisa testar novas funcionalidades rapidamente sem a complexidade de um ambiente de produção completo.
+   - Adicione uma conexão de serviço com o **Azure Container Registry (ACR)** e o **Azure Container Instances (ACI)**, que serão utilizados para hospedar a aplicação.
 
 3. **Configuração do Pipeline de Build (CI)** 🛠️
    - Crie um pipeline de build no **Azure Pipelines** para o repositório do projeto.
@@ -253,13 +252,14 @@ steps:
 
 
 4. **Configuração do Pipeline de Release (CD)** 🚢
-   - Crie um pipeline de release para automatizar o deploy.
-   - Configure o pipeline para usar o artefato gerado no pipeline de build como origem.
-   - Defina estágios de deploy para ambientes como **Desenvolvimento** (usando **Azure Container Instance - ACI**, que oferece um ambiente leve para testes e desenvolvimento) e **Produção** (usando **Azure Web App Service** para um ambiente robusto e escalável).
+   - **Criação do Pipeline de Release**: Configure um pipeline de release no Azure DevOps para automatizar a implantação da aplicação.
+   - **Integração com o Pipeline de Build**: Utilize o artefato gerado pelo pipeline de build como fonte para garantir que a versão mais recente seja implantada.
+   - **Estágio de Deploy com ACI**: Defina estágios de deploy usando **Azure Container Instances (ACI)** como o ambiente de produção, permitindo implantações escaláveis e seguras.
+   - **Aprovações e Gates**: Caso necessário, implemente revisões e aprovações antes de implantações em produção para aumentar a segurança e confiabilidade. 
 
 5. **Teste do Deploy Manual** 🧪
    - Realize um teste inicial do pipeline de release criando uma nova release manualmente.
-   - Verifique se a aplicação é implantada corretamente e se todos os serviços estão funcionando como esperado. ✅ O ACI é útil para testar novas funcionalidades antes de serem promovidas para o ambiente de produção.
+   - Verifique se a aplicação é implantada corretamente e se todos os serviços estão funcionando como esperado. 
      
 ---
 
