@@ -153,49 +153,10 @@ Para excluir um lugar, aperte em 'Excluir'.
 Para excluir um itinerário, aperte em 'Excluir'.
 
 ---
-## 🐳 Dockerfile Utilizado
-
-A configuração do `Dockerfile` é essencial para preparar o ambiente de execução da aplicação, garantindo que todos os componentes necessários sejam incluídos na imagem Docker e que a aplicação seja executada de forma segura. Abaixo estão os detalhes de cada etapa do `Dockerfile` utilizado para o VisitMap:
-
-```Dockerfile
-# Use a imagem base do OpenJDK 17 com suporte ao Alpine Linux
-FROM eclipse-temurin:17-jdk-alpine
-
-# Instale o Maven para gerenciar dependências e compilar o projeto
-RUN apk add --no-cache maven
-
-# Defina o diretório de trabalho para a aplicação
-WORKDIR /app
-
-# Copie o arquivo de configuração do Maven para o diretório de trabalho
-COPY pom.xml .
-
-# Copie o código-fonte da aplicação para o diretório de trabalho
-COPY src ./src
-
-# Compile a aplicação com o Maven e gere o arquivo JAR
-RUN mvn clean package
-
-# Crie um usuário não privilegiado para executar a aplicação com segurança
-RUN adduser -D appuser
-
-# Altere a propriedade do arquivo JAR gerado para o usuário não privilegiado
-RUN chown appuser:appuser target/VisitMap-0.0.1-SNAPSHOT.jar
-
-# Altere para o usuário não privilegiado para evitar execução como root
-USER appuser
-
-# Exponha a porta 8080 para acesso à aplicação
-EXPOSE 8080
-
-# Defina o comando de entrada para iniciar a aplicação usando o JAR gerado
-CMD ["java", "-jar", "target/VisitMap-0.0.1-SNAPSHOT.jar"]
-```
----
 
 ## 🚀 Deploy e Integração Contínua - Azure Pipelines
 
-O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega contínua, aproveitando os recursos do **Azure Container Registry (ACR)** e do **Azure Container Instances (ACI)**. O pipeline de CI/CD é configurado para garantir que o processo de build, teste e deploy seja contínuo e integrado ao fluxo de desenvolvimento. 🌐🔧
+O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega contínua, aproveitando os recursos do **Azure Web App**. O pipeline de CI/CD é configurado para garantir que o processo de build, teste e deploy seja contínuo e integrado ao fluxo de desenvolvimento. 🌐🔧
 
 ### Passo a Passo para Configuração do CI/CD
 
@@ -206,7 +167,7 @@ O **VisitMap** utiliza uma abordagem automatizada para implantação e entrega c
 2. **Criação da Infraestrutura no Azure** ☁️
    - Inicie configurando uma conta no **Azure Cloud**.
    - Utilize o **Azure CLI** para automatizar a criação da infraestrutura necessária para o seu projeto, garantindo que todos os recursos sejam provisionados de forma eficiente e padronizada.
-   - Adicione uma conexão de serviço com o **Azure Container Registry (ACR)** e o **Azure Container Instances (ACI)**, que serão utilizados para hospedar a aplicação.
+   - Adicione uma conexão de serviço com o **Azure Web App**, que será utilizado para hospedar a aplicação.
 
 3. **Configuração do Pipeline de Build (CI)** 🛠️
    - Crie um pipeline de build no **Azure Pipelines** para o repositório do projeto.
@@ -225,42 +186,32 @@ steps:
   inputs:
     azureSubscription: '$(AzureSubscriptionID)'
     mavenPomFile: 'pom.xml'
-    goals: 'clean package'
-    options: '-DskipTests=false'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'VisitMap Tests run'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.17'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-- task: Docker@2
-  inputs:
-    containerRegistry: 'visitmaprm552258'
-    repository: 'visitmap'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
-    tags: |
-      $(Build.BuildId)
-      latest
 ```
 
-   - Esse pipeline executa os testes unitários com **JUnit**, constrói o pacote da aplicação e gera uma imagem Docker, que é enviada ao **Azure Container Registry**. 🐳 O **ACR** permite armazenar e gerenciar essas imagens de forma segura.
+   - Esse pipeline executa os testes unitários com **JUnit**, constrói o pacote da aplicação e gera uma imagem Docker. 🐳
+
 > [!IMPORTANT]  
 > **Nota: A variável `$(AzureSubscriptionID)` representa o identificador da assinatura do Azure, que é utilizado para autenticação e acesso seguro aos recursos da conta no Azure.** 
-
 
 4. **Configuração do Pipeline de Release (CD)** 🚢
    - **Criação do Pipeline de Release**: Configure um pipeline de release no Azure DevOps para automatizar a implantação da aplicação.
    - **Integração com o Pipeline de Build**: Utilize o artefato gerado pelo pipeline de build como fonte para garantir que a versão mais recente seja implantada.
-   - **Estágio de Deploy com ACI**: Defina estágios de deploy usando **Azure Container Instances (ACI)** como o ambiente de produção, permitindo implantações escaláveis e seguras.
-   - **Aprovações e Gates**: Caso necessário, implemente revisões e aprovações antes de implantações em produção para aumentar a segurança e confiabilidade. 
+   - **Estágio de Deploy com Web App**: Defina estágios de deploy utilizando o **Azure Web App** como o ambiente de produção, permitindo implantações escaláveis e seguras.
+   - **Aprovações e Gates**: Caso necessário, implemente revisões e aprovações antes de implantações em produção para aumentar a segurança e confiabilidade.
 
 5. **Teste do Deploy Manual** 🧪
    - Realize um teste inicial do pipeline de release criando uma nova release manualmente.
-   - Verifique se a aplicação é implantada corretamente e se todos os serviços estão funcionando como esperado. 
-     
+   - Verifique se a aplicação é implantada corretamente e se todos os serviços estão funcionando como esperado.
+
 ---
 
 ## Tecnologias Utilizadas 🛠️
