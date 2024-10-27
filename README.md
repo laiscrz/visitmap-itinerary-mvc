@@ -76,6 +76,83 @@ No total, 12 testes foram executados com sucesso, confirmando que as funcionalid
 ![Terminal com comando `mvn clean test`](https://github.com/user-attachments/assets/f03da1d2-d8c9-4a78-bec9-4cc4b63b6a80)
 
 ---
+
+## CRUD - Exemplos 📋
+
+### 1. Criar 🎤
+
+#### *Lugar Turístico* 🏛️
+
+Para criar um novo Lugar Turístico, você deve enviar um formulário com as seguintes informações:
+
+```plaintext
+Nome: Museu de Arte Moderna
+Cidade: São Paulo
+Estado: São Paulo
+Descrição: Um museu que exibe obras de arte moderna e contemporânea.
+Tipo: MUSEU
+Entrada: PAGO
+Rua: Avenida Paulista, 1234
+URL da Imagem: https://abrir.link/BMdUO
+```
+
+#### *Itinerário* ✈️
+
+Para criar um novo Itinerário, você pode usar o seguinte formulário:
+
+```plaintext
+Nome: Paulistano por um Dia
+País: BRASIL
+(Selecione os Lugares)
+```
+
+### 2. Ler 📖
+
+#### *Lugar Turístico* 🔍
+
+Para ler os detalhes de um lugar específico, aperte em 'Detalhes'.
+
+#### *Itinerário* 📅
+
+Para ler os detalhes de um Itinerário específico, aperte em 'Detalhes'.
+
+### 3. Atualizar ✏️
+
+#### *Lugar Turístico* 🏛️
+
+Para atualizar as informações de um lugar existente, você pode enviar o seguinte formulário:
+
+```plaintext
+Nome: MASP
+Cidade: São Paulo
+Estado: São Paulo
+Descrição: O MASP é famoso por sua arquitetura única e coleção de arte moderna, contemporânea e clássica.
+Tipo: MUSEU
+Entrada: PAGO
+Rua: Av Paulista, 1234
+URL da Imagem: https://abrir.link/BMdUO
+```
+
+#### *Itinerário* 🌟
+
+Para atualizar um itinerário existente, você pode usar o seguinte formulário:
+
+```plaintext
+Nome: São Paulo Cultural
+(Selecione os Lugares )
+```
+
+### 4. Excluir 🗑️
+
+#### *Lugar Turístico* ❌
+
+Para excluir um lugar, aperte em 'Excluir'.
+
+#### *Itinerário* ❌
+
+Para excluir um itinerário, aperte em 'Excluir'.
+
+---
 ## 🐳 Dockerfile Utilizado
 
 A configuração do `Dockerfile` é essencial para preparar o ambiente de execução da aplicação, garantindo que todos os componentes necessários sejam incluídos na imagem Docker e que a aplicação seja executada de forma segura. Abaixo estão os detalhes de cada etapa do `Dockerfile` utilizado para o VisitMap:
