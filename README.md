@@ -197,7 +197,7 @@ steps:
     sonarQubeRunAnalysis: false
 ```
 
-   - Esse pipeline executa os testes unitários com **JUnit**, constrói o pacote da aplicação e gera uma imagem Docker. 🐳
+   - Esse pipeline executa os testes unitários com **JUnit**, constrói o pacote da aplicação. 🔧
 
 > [!IMPORTANT]  
 > **Nota: A variável `$(AzureSubscriptionID)` representa o identificador da assinatura do Azure, que é utilizado para autenticação e acesso seguro aos recursos da conta no Azure.** 
