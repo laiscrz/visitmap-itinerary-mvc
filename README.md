@@ -269,6 +269,9 @@ steps:
 - **Thymeleaf**: Motor de templates para gerar páginas HTML dinâmicas.
 - **Hibernate**: ORM para mapeamento objeto-relacional.
 - **Oracle Database**: Banco de dados relacional utilizado para armazenar informações de itinerários e atrações turísticas.
+- **JUnit**: Framework para testes unitários em Java.
+- **Maven**: Ferramenta de gerenciamento de dependências e build do projeto.
+- **Azure CLI**: Utilizada para criar e gerenciar Azure Container Registry (ACR) e Azure Container Instances (ACI).
 - **Azure DevOps**: Para configuração de pipelines de CI/CD.
 - **Docker**: Utilizado para containerização da aplicação.
 
