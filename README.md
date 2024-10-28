@@ -180,6 +180,8 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+  name: Azure Pipelines
+  demands: maven
 
 steps:
 - task: Maven@4
@@ -188,13 +190,25 @@ steps:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    testRunTitle: 'VisitMap Tests run'
+    testRunTitle: 'VisitMap Tests Code'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.17'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
+- task: CopyFiles@2
+  displayName: 'Copy Files : $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/target/*.jar'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: app'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: app
 ```
 
    - Esse pipeline executa os testes unitários com **JUnit**, constrói o pacote da aplicação. 🔧
