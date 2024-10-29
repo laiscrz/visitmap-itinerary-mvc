@@ -67,7 +67,7 @@
 <header th:insert="~{fragments/header :: header}"></header>
 
 <main class="container form-container mb-4">
-  <h1 class="mb-4">Formulário Itinerário</h1>
+  <h1 class="mb-4">Formulário - Itinerário</h1>
 
   <form th:action="@{${itinerary.id} != null ? '/itineraries/' + ${itinerary.id} : '/itineraries'}" th:object="${itinerary}"
         method="post" class="row g-3">
