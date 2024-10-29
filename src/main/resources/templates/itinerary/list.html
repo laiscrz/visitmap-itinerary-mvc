@@ -41,6 +41,13 @@
 <main class="container my-4">
     <h1 class="header-title">Lista de Itinerários</h1>
 
+    <!-- Exibe mensagem de sucesso -->
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+    <a th:href="@{/itineraries/new}" class="btn btn-success mb-3">
+        <i class="fas fa-plus"></i> Adicionar Novo Itinerário
+    </a>
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -71,9 +78,6 @@
         </tbody>
     </table>
 
-    <a th:href="@{/itineraries/new}" class="btn btn-success">
-        <i class="fas fa-plus"></i> Adicionar Novo Itinerário
-    </a>
 </main>
 
 <!-- Incluir o fragmento do footer -->

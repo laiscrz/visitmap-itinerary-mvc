@@ -64,7 +64,7 @@
 <header th:insert="~{fragments/header :: header}"></header>
 
 <main class="container form-container mb-4">
-    <h1 class="mb-4">Cadastrar Lugar</h1>
+    <h1 class="mb-4">Formulário Lugar</h1>
 
     <form th:action="@{${place.id} != null ? '/places/' + ${place.id} : '/places'}" th:object="${place}"
           method="post" enctype="multipart/form-data" class="row g-3">
