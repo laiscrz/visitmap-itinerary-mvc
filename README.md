@@ -227,6 +227,13 @@ steps:
    - Verifique se a aplicação é implantada corretamente e se todos os serviços estão funcionando como esperado.
 
 ---
+## 🌐 Imagem da Aplicação Rodando na Nuvem
+
+Aqui está uma captura de tela da aplicação **VisitMap** rodando na nuvem:
+
+![VisitMap Rodando na Nuvem](https://github.com/user-attachments/assets/8d00b7ee-2bbe-40dd-ab5e-633a69c338c4)
+
+---
 ## 🧩 Integrações
 
 Print da Task evidenciando a integração do Repos com o Azure DevOps, destacando a conclusão da tarefa e a configuração do pipeline
@@ -246,6 +253,14 @@ Print da Task evidenciando a integração do Repos com o Azure DevOps, destacand
 - **Azure CLI**: Utilizada para criar e gerenciar Web App Service.
 - **Azure DevOps**: Para configuração de pipelines de CI/CD.
 - **Docker**: Utilizado para containerização da aplicação.
+
+---
+
+
+## 📄 Documentação Adicional
+
+- **Código Fonte**: [GitHub Repository](https://github.com/laiscrz/visitmap-itinerary-mvc) 📁
+- **Vídeo de Demonstração**: [YouTube Video](https://youtu.be/WphJ_nwjJEM) 📹
 
 ---
 
