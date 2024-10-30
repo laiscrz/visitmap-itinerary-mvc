@@ -227,6 +227,13 @@ steps:
    - Verifique se a aplicação é implantada corretamente e se todos os serviços estão funcionando como esperado.
 
 ---
+## 🧩 Integrações
+
+Print da Task evidenciando a integração do Repos com o Azure DevOps, destacando a conclusão da tarefa e a configuração do pipeline
+
+![Integrações com Repos e Pipelines](https://github.com/user-attachments/assets/097654f2-14d4-43fc-a5ce-a6019fe5a22d)
+
+---
 
 ## Tecnologias Utilizadas 🛠️
 
