@@ -56,7 +56,7 @@ public class PlaceController {
     }
 
     @PostMapping("/{id}")
-    public String updateMusic(@PathVariable Long id, @ModelAttribute Place place) {
+    public String updatePlace(@PathVariable Long id, @ModelAttribute Place place) {
         place.setId(id);
         placeService.savePlace(place);
         return "redirect:/places";
