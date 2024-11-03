@@ -252,7 +252,6 @@ Print da Task evidenciando a integração do Repos com o Azure DevOps, destacand
 - **Maven**: Ferramenta de gerenciamento de dependências e build do projeto.
 - **Azure CLI**: Utilizada para criar e gerenciar Web App Service.
 - **Azure DevOps**: Para configuração de pipelines de CI/CD.
-- **Docker**: Utilizado para containerização da aplicação.
 
 ---
 
